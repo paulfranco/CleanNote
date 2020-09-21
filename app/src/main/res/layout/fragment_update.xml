@@ -28,7 +28,7 @@
         android:layout_marginTop="8dp"
         android:layout_height="60dp"
         android:background="@drawable/custom_input"
-        android:entries="@array/priorities"
+        android:entries="@array/importance"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"

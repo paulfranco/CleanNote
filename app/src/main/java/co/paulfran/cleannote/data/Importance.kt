@@ -1,6 +1,6 @@
 package co.paulfran.cleannote.data
 
-enum class Priority {
+enum class Importance {
     HIGH,
     MEDIUM,
     LOW

@@ -15,9 +15,9 @@
     <string name="delete">Delete</string>
     <string name="add_data">Add Data</string>
 
-    <string-array name="priorities">
-        <item>High Priority</item>
-        <item>Medium Priority</item>
-        <item>Low Priority</item>
+    <string-array name="importance">
+        <item>High Importance</item>
+        <item>Medium Importance</item>
+        <item>Low Importance</item>
     </string-array>
 </resources>
