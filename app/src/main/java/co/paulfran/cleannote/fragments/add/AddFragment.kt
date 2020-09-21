@@ -13,6 +13,7 @@ import co.paulfran.cleannote.data.models.NoteData
 import co.paulfran.cleannote.data.viewmodel.NoteViewModel
 import co.paulfran.cleannote.fragments.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.fragment_add.view.*
 
 
 class AddFragment : Fragment() {
@@ -28,6 +29,8 @@ class AddFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_add, container, false)
         // set menu
         setHasOptionsMenu(true)
+
+        view.importanceSpinner.onItemSelectedListener = sharedViewModel.listerner
 
         return view
     }
