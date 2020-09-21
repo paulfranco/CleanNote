@@ -1,4 +1,4 @@
-package co.paulfran.cleannote.data
+package co.paulfran.cleannote.data.models
 
 enum class Importance {
     HIGH,

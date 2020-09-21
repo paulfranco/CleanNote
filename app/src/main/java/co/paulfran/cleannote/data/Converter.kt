@@ -1,6 +1,7 @@
 package co.paulfran.cleannote.data
 
 import androidx.room.TypeConverter
+import co.paulfran.cleannote.data.models.Importance
 
 class Converter {
 

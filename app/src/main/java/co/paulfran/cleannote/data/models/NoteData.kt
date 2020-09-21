@@ -1,7 +1,8 @@
-package co.paulfran.cleannote.data
+package co.paulfran.cleannote.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import co.paulfran.cleannote.data.models.Importance
 
 @Entity(tableName = "note_table")
 data class NoteData(
