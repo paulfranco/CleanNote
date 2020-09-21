@@ -11,12 +11,14 @@ import co.paulfran.cleannote.R
 import co.paulfran.cleannote.data.models.Importance
 import co.paulfran.cleannote.data.models.NoteData
 import co.paulfran.cleannote.data.viewmodel.NoteViewModel
+import co.paulfran.cleannote.fragments.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 
 
 class AddFragment : Fragment() {
 
     private val noteViewModel: NoteViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,14 +48,14 @@ class AddFragment : Fragment() {
         val importance = importanceSpinner.selectedItem.toString()
         val description = descriptionET.text.toString()
 
-        val validation = verifyDataFromUser(title, description)
+        val validation = sharedViewModel.verifyDataFromUser(title, description)
 
         if(validation) {
             // insert data to database
             val newData = NoteData(
                 0,
                 title,
-                parseImportance(importance),
+                sharedViewModel.parseImportance(importance),
                 description
             )
             noteViewModel.insertData(newData)
@@ -66,19 +68,6 @@ class AddFragment : Fragment() {
 
     }
 
-    private fun verifyDataFromUser(title: String, description: String): Boolean {
-        return if(TextUtils.isEmpty(title) || TextUtils.isEmpty(description)) {
-            false
-        } else !(title.isEmpty() || description.isEmpty())
-    }
 
-    private fun parseImportance(importance: String): Importance {
-        return when(importance) {
-            "High Importance" -> {Importance.HIGH}
-            "Medium Importance" -> {Importance.MEDIUM}
-            "Low Importance" -> {Importance.LOW}
-            else -> Importance.LOW
-        }
-    }
 
 }
