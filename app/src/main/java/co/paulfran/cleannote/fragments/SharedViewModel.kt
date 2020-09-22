@@ -45,4 +45,12 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun parseImportanceToInt(importance: Importance): Int {
+        return when(importance) {
+            Importance.HIGH -> 0
+            Importance.MEDIUM -> 1
+            Importance.LOW -> 2
+        }
+    }
+
 }

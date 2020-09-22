@@ -37,7 +37,7 @@
             android:text="Feed Ira"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:maxLength="20"
+            android:maxLength="30"
             android:textColor="@color/darkGray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
