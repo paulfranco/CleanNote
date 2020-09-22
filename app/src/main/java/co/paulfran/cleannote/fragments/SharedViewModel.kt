@@ -14,8 +14,8 @@ import co.paulfran.cleannote.data.models.NoteData
 
 class SharedViewModel(application: Application): AndroidViewModel(application) {
 
-    /** ============================= List Fragment =============================*/
-    val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(true)
+    /** ================================ List Fragment ================================*/
+    val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun checkIfDatabaseIsEmpty(noteData: List<NoteData>) {
         emptyDatabase.value = noteData.isEmpty()
