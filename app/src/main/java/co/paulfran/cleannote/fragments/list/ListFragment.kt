@@ -16,6 +16,7 @@ import co.paulfran.cleannote.data.viewmodel.NoteViewModel
 import co.paulfran.cleannote.databinding.FragmentListBinding
 import co.paulfran.cleannote.fragments.SharedViewModel
 import co.paulfran.cleannote.fragments.list.adapter.ListAdapter
+import co.paulfran.cleannote.utils.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
@@ -50,6 +51,9 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
         // set menu
         setHasOptionsMenu(true)
+
+        // hide soft keyboard
+        hideKeyboard(requireActivity())
 
         return binding.root
     }
