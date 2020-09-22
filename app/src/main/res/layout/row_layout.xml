@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/priorityIndicator"
+            android:id="@+id/importanceIndicator"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginTop="16dp"
