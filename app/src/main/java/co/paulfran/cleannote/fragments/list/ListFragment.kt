@@ -90,7 +90,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         ).setActionTextColor(Color.RED)
         snackBar.setAction("Undo") {
             noteViewModel.insertData(deletedItem)
-            adapter.notifyItemChanged(position)
+
         }
         snackBar.show()
     }
