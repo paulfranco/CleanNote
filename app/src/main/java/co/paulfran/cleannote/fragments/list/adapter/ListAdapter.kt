@@ -2,6 +2,7 @@ package co.paulfran.cleannote.fragments.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import co.paulfran.cleannote.data.models.NoteData
 import co.paulfran.cleannote.databinding.RowLayoutBinding
@@ -43,7 +44,9 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     }
 
     fun setData(noteData: List<NoteData>) {
+        val noteDiffUtil = NoteDiffUtil(dataList, noteData)
+        val noteDiffUtilResult = DiffUtil.calculateDiff(noteDiffUtil)
         this.dataList = noteData
-        notifyDataSetChanged()
+        noteDiffUtilResult.dispatchUpdatesTo(this)
     }
 }
