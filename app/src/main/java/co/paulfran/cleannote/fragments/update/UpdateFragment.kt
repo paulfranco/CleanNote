@@ -12,6 +12,7 @@ import co.paulfran.cleannote.R
 import co.paulfran.cleannote.data.models.Importance
 import co.paulfran.cleannote.data.models.NoteData
 import co.paulfran.cleannote.data.viewmodel.NoteViewModel
+import co.paulfran.cleannote.databinding.FragmentUpdateBinding
 import co.paulfran.cleannote.fragments.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update.view.*
@@ -20,25 +21,28 @@ import kotlinx.android.synthetic.main.fragment_update.view.*
 class UpdateFragment : Fragment() {
 
     private val args by navArgs<UpdateFragmentArgs>()
+
     private val sharedViewModel: SharedViewModel by viewModels()
     private val noteViewModel: NoteViewModel by viewModels()
+
+    private var _binding: FragmentUpdateBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_update, container, false)
+        // Data Binding
+        _binding = FragmentUpdateBinding.inflate(inflater, container, false)
+        binding.args = args
         // set menu
         setHasOptionsMenu(true)
 
-        view.current_titleET.setText(args.currentItem.title)
-        view.current_descriptionET.setText(args.currentItem.description)
-        view.current_importanceSpinner.setSelection(sharedViewModel.parseImportanceToInt(args.currentItem.importance))
 
-        view.current_importanceSpinner.onItemSelectedListener = sharedViewModel.listerner
+        // spinner Item Selected Listener
+        binding.currentImportanceSpinner.current_importanceSpinner.onItemSelectedListener = sharedViewModel.listerner
 
-        return view
+        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -88,6 +92,11 @@ class UpdateFragment : Fragment() {
         builder.setTitle("Delete '${args.currentItem.title}'?")
         builder.setMessage("Are you sure you want to delete '${args.currentItem.title}'?")
         builder.create().show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

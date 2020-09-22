@@ -14,12 +14,13 @@ import co.paulfran.cleannote.data.models.NoteData
 
 class SharedViewModel(application: Application): AndroidViewModel(application) {
 
+    /** ============================= List Fragment =============================*/
     val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(true)
 
     fun checkIfDatabaseIsEmpty(noteData: List<NoteData>) {
         emptyDatabase.value = noteData.isEmpty()
     }
-
+    /** ============================= Add/Update Fragment =============================*/
     val listerner: AdapterView.OnItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -50,14 +51,6 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
             "Low Importance" -> {
                 Importance.LOW}
             else -> Importance.LOW
-        }
-    }
-
-    fun parseImportanceToInt(importance: Importance): Int {
-        return when(importance) {
-            Importance.HIGH -> 0
-            Importance.MEDIUM -> 1
-            Importance.LOW -> 2
         }
     }
 
