@@ -7,6 +7,8 @@ import co.paulfran.cleannote.data.models.NoteData
 class NoteRepository(private val noteDao: NoteDao) {
 
     val getAllData: LiveData<List<NoteData>> = noteDao.getAllData()
+    val sortByHighImportance: LiveData<List<NoteData>> = noteDao.sortByHighImportance()
+    val sortByLowImportance: LiveData<List<NoteData>> = noteDao.sortByLowImportance()
 
     suspend fun insertData(noteData: NoteData) {
         noteDao.insertData(noteData)

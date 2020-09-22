@@ -15,10 +15,10 @@
             android:title="@string/sort_by">
             <menu>
                 <item
-                    android:id="@+id/menu_priority_high"
+                    android:id="@+id/menu_importance_high"
                     android:title="@string/priority_high"/>
                 <item
-                    android:id="@+id/menu_priority_low"
+                    android:id="@+id/menu_importance_low"
                     android:title="@string/priority_low"/>
             </menu>
 
