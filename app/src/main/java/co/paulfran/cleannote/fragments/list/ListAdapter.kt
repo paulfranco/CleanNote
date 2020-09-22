@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import co.paulfran.cleannote.R
 import co.paulfran.cleannote.data.models.Importance
@@ -29,6 +30,11 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.itemView.titleText.text = dataList[position].title
         holder.itemView.descriptionText.text = dataList[position].description
+
+        holder.itemView.row_background.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(dataList[position])
+            holder.itemView.findNavController().navigate(action)
+        }
 
         when(dataList[position].importance) {
             Importance.HIGH -> holder.itemView.importanceIndicator.setCardBackgroundColor(

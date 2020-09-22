@@ -26,6 +26,9 @@
             app:destination="@id/listFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left" />
+        <argument
+            android:name="currentItem"
+            app:argType="co.paulfran.cleannote.data.models.NoteData" />
     </fragment>
     <fragment
         android:id="@+id/listFragment"
