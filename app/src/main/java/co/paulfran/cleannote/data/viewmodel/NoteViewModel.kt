@@ -48,4 +48,8 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun searchDatabase(searchQuery: String): LiveData<List<NoteData>> {
+        return repository.searchDatabase(searchQuery)
+    }
+
 }
