@@ -9,18 +9,30 @@ import androidx.recyclerview.widget.RecyclerView
 import co.paulfran.cleannote.R
 import co.paulfran.cleannote.data.models.Importance
 import co.paulfran.cleannote.data.models.NoteData
+import co.paulfran.cleannote.databinding.RowLayoutBinding
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
-    var dataList = emptyList<NoteData>()
 
-    class ListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    private var dataList = emptyList<NoteData>()
 
+    class ListViewHolder(private val binding: RowLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(noteData: NoteData) {
+            binding.noteData = noteData
+            binding.executePendingBindings()
+        }
+        companion object {
+            fun from(parent: ViewGroup): ListViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = RowLayoutBinding.inflate(layoutInflater, parent, false)
+                return ListViewHolder(binding)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_layout, parent, false))
+        return ListViewHolder.from(parent)
     }
 
     override fun getItemCount(): Int {
@@ -28,37 +40,8 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.itemView.titleText.text = dataList[position].title
-        holder.itemView.descriptionText.text = dataList[position].description
-
-        holder.itemView.row_background.setOnClickListener {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(dataList[position])
-            holder.itemView.findNavController().navigate(action)
-        }
-
-        when(dataList[position].importance) {
-            Importance.HIGH -> holder.itemView.importanceIndicator.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.red
-                )
-            )
-
-            Importance.MEDIUM -> holder.itemView.importanceIndicator.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.yellow
-                )
-            )
-
-            Importance.LOW -> holder.itemView.importanceIndicator.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.green
-                )
-            )
-
-        }
+        val currentItem = dataList[position]
+        holder.bind(currentItem)
     }
 
     fun setData(noteData: List<NoteData>) {
