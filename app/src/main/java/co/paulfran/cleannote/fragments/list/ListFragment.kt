@@ -11,12 +11,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.paulfran.cleannote.R
 import co.paulfran.cleannote.data.viewmodel.NoteViewModel
+import co.paulfran.cleannote.fragments.SharedViewModel
 import kotlinx.android.synthetic.main.fragment_list.view.*
 
 
 class ListFragment : Fragment() {
 
     private val noteViewModel: NoteViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
 
     private val adapter: ListAdapter by lazy { ListAdapter() }
 
@@ -31,7 +33,12 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         noteViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
+            sharedViewModel.checkIfDatabaseIsEmpty(data)
             adapter.setData(data)
+        })
+
+        sharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
+            showEmptyDatabaseViews(it)
         })
 
         view.floatingActionButton.setOnClickListener {
@@ -42,6 +49,16 @@ class ListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         return view
+    }
+
+    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
+        if(emptyDatabase) {
+            view?.addDataImage?.visibility = View.VISIBLE
+            view?.addDataText?.visibility = View.VISIBLE
+        } else {
+            view?.addDataImage?.visibility = View.INVISIBLE
+            view?.addDataText?.visibility = View.INVISIBLE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

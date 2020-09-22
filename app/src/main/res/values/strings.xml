@@ -13,7 +13,7 @@
     <string name="add">Add</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
-    <string name="add_data">Add Data</string>
+    <string name="add_data">No Data</string>
 
     <string-array name="importance">
         <item>High Importance</item>
