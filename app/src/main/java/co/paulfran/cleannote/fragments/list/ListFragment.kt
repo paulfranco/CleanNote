@@ -1,6 +1,7 @@
 package co.paulfran.cleannote.fragments.list
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -82,7 +83,7 @@ class ListFragment : Fragment() {
         val snackBar = Snackbar.make(
             view, "Deleted '${deletedItem.title}'",
             Snackbar.LENGTH_LONG
-        )
+        ).setActionTextColor(Color.RED)
         snackBar.setAction("Undo") {
             noteViewModel.insertData(deletedItem)
             adapter.notifyItemChanged(position)
